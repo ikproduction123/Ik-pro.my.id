@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Client - IKPro Wedding</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>IKPro Wedding</h2>
+        </div>
+
+        <ul class="menu">
+            <li class="active">
+                <a href="#">🏠 Dashboard</a>
+            </li>
+
+            <li>
+                <a href="#">👥 Daftar Tamu</a>
+            </li>
+
+            <li>
+                <a href="#">💌 RSVP</a>
+            </li>
+
+            <li>
+                <a href="#">💬 Ucapan</a>
+            </li>
+
+            <li>
+                <a href="#">📱 Broadcast WA</a>
+            </li>
+
+            <li>
+                <a href="#">⚙️ Pengaturan</a>
+            </li>
+        </ul>
+
+        <button id="logoutBtn" class="logout-btn">
+            Logout
+        </button>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard Client</h1>
+                <p>Kelola undangan digital Anda</p>
+            </div>
+
+            <div class="user-box">
+                <span id="userEmail">
+                    client@email.com
+                </span>
+            </div>
+
+        </header>
+
+        <!-- Info Undangan -->
+        <section class="invitation-info">
+
+            <div class="info-card">
+
+                <h3>Nama Undangan</h3>
+
+                <p>Anisa & Bagas</p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>Status Paket</h3>
+
+                <p>Premium</p>
+
+            </div>
+
+            <div class="info-card">
+
+                <h3>Link Undangan</h3>
+
+                <div class="copy-area">
+
+                    <input
+                        type="text"
+                        id="inviteLink"
+                        value="https://ik-pro.my.id/anisa-bagas"
+                        readonly
+                    >
+
+                    <button id="copyBtn">
+                        Copy
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Statistik -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <h2 id="totalGuests">0</h2>
+                <p>Total Tamu</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="hadirGuests">0</h2>
+                <p>Hadir</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="tidakHadirGuests">0</h2>
+                <p>Tidak Hadir</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="pendingGuests">0</h2>
+                <p>Belum Konfirmasi</p>
+            </div>
+
+        </section>
+
+        <!-- Quick Action -->
+        <section class="quick-actions">
+
+            <h2>Aksi Cepat</h2>
+
+            <div class="action-grid">
+
+                <button class="action-btn">
+                    ➕ Tambah Tamu
+                </button>
+
+                <button class="action-btn">
+                    📱 Kirim WhatsApp
+                </button>
+
+                <button class="action-btn">
+                    📋 Copy Link
+                </button>
+
+                <button class="action-btn">
+                    📊 Lihat RSVP
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- RSVP Terbaru -->
+        <section class="recent-rsvp">
+
+            <h2>RSVP Terbaru</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Status</th>
+                        <th>Jumlah</th>
+                    </tr>
+                </thead>
+
+                <tbody id="rsvpTable">
+
+                    <tr>
+                        <td>Budi Santoso</td>
+                        <td>Hadir</td>
+                        <td>2</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="dashboard.js"></script>
+
+</body>
+</html>

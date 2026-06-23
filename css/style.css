@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #fff;
+    color: #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    position: fixed;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #c28b42;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url("../assets/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: auto;
+}
+
+.hero-btn {
+    margin-top: 30px;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.btn-primary {
+    background: #c28b42;
+    color: white;
+}
+
+.btn-secondary {
+    background: white;
+    color: #333;
+}
+
+.features,
+.portfolio,
+.pricing {
+    padding: 100px 8%;
+}
+
+.features h2,
+.portfolio h2,
+.pricing h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.feature-grid,
+.template-grid,
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card,
+.price-card {
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.template img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.popular {
+    border: 2px solid #c28b42;
+}
+
+.cta {
+    padding: 100px 20px;
+    text-align: center;
+    background: #f8f8f8;
+}
+
+footer {
+    padding: 40px;
+    text-align: center;
+    background: #222;
+    color: white;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+}
+
+.login-btn{
+    background:#c28b42;
+    color:white;
+    padding:10px 20px;
+    border-radius:30px;
+    text-decoration:none;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        transition: 0.3s;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+}
