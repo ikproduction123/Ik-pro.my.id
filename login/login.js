@@ -74,5 +74,5 @@ loginForm.addEventListener("submit", async (e) => {
         return;
     }
 
-    window.location.href = "../dashboard/";
+    window.location.href = "../dashboard/dashboard.html";
 });
