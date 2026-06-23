@@ -19,5 +19,5 @@ document.getElementById("logoutBtn")
 
     await supabase.auth.signOut();
 
-    window.location.href = "../login/";
+    window.location.href = "../login/login.html";
 });
