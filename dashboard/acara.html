@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Data Acara</title>
+
+<link rel="stylesheet" href="../css/dashboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+
+<div class="form-container">
+
+<h1>Data Acara</h1>
+
+<form id="eventForm">
+
+<h3>Akad Nikah</h3>
+
+<input
+type="date"
+id="akadDate">
+
+<input
+type="time"
+id="akadTime">
+
+<input
+type="text"
+id="akadLocation"
+placeholder="Lokasi Akad">
+
+<input
+type="text"
+id="akadMaps"
+placeholder="Link Google Maps">
+
+<hr>
+
+<h3>Resepsi</h3>
+
+<input
+type="date"
+id="receptionDate">
+
+<input
+type="time"
+id="receptionTime">
+
+<input
+type="text"
+id="receptionLocation"
+placeholder="Lokasi Resepsi">
+
+<input
+type="text"
+id="receptionMaps"
+placeholder="Link Google Maps">
+
+<button type="submit">
+
+Simpan Acara
+
+</button>
+
+</form>
+
+</div>
+
+<script src="../js/supabase.js"></script>
+<script src="../js/acara.js"></script>
+
+</body>
+</html>

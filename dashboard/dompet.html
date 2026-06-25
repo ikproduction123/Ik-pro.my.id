@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dompet Digital</title>
+
+<link rel="stylesheet" href="../css/dashboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="form-container">
+
+<h1>Dompet Digital</h1>
+
+<form id="walletForm">
+
+<select id="bankName">
+
+<option value="BCA">BCA</option>
+<option value="BRI">BRI</option>
+<option value="BNI">BNI</option>
+<option value="Mandiri">Mandiri</option>
+<option value="Dana">Dana</option>
+<option value="OVO">OVO</option>
+<option value="GoPay">GoPay</option>
+<option value="ShopeePay">ShopeePay</option>
+
+</select>
+
+<input
+type="text"
+id="ownerName"
+placeholder="Nama Pemilik">
+
+<input
+type="text"
+id="accountNumber"
+placeholder="Nomor Rekening">
+
+<button type="submit">
+
+Simpan
+
+</button>
+
+</form>
+
+<hr>
+
+<div id="walletList"></div>
+
+</div>
+
+<script src="../js/supabase.js"></script>
+<script src="../js/dompet.js"></script>
+
+</body>
+</html>

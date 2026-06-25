@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+        <title>Undangan Pernikahan</title>
+
+        <link rel="stylesheet" href="css/invitation.css" />
+
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </head>
+
+    <body>
+        <!-- COVER -->
+
+        <section id="cover">
+            <div class="cover-content">
+                <p>Kepada Yth.</p>
+
+                <h2 id="guestName">Nama Tamu</h2>
+
+                <h1 id="coupleName">Anisa & Bagas</h1>
+
+                <button id="openInvitation">Buka Undangan</button>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+
+        <section id="quote" data-aos="fade-up">
+            <h2>Quote Pernikahan</h2>
+
+            <p>
+                Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
+                pasangan...
+            </p>
+        </section>
+
+        <!-- PENGANTIN -->
+
+        <section id="couple" data-aos="fade-up">
+            <div id="groomCard"></div>
+
+            <div id="brideCard"></div>
+        </section>
+
+        <!-- CERITA CINTA -->
+
+        <section id="story" data-aos="fade-up">
+            <h2>Cerita Cinta</h2>
+
+            <div id="loveStory"></div>
+        </section>
+
+        <!-- ACARA -->
+
+        <section id="event" data-aos="fade-up">
+            <div id="eventContent"></div>
+        </section>
+
+        <!-- COUNTDOWN -->
+
+        <section id="countdown" data-aos="zoom-in">
+            <div class="count-box">
+                <h3 id="days">0</h3>
+                <p>Hari</p>
+            </div>
+
+            <div class="count-box">
+                <h3 id="hours">0</h3>
+                <p>Jam</p>
+            </div>
+
+            <div class="count-box">
+                <h3 id="minutes">0</h3>
+                <p>Menit</p>
+            </div>
+
+            <div class="count-box">
+                <h3 id="seconds">0</h3>
+                <p>Detik</p>
+            </div>
+        </section>
+
+        <!-- MAPS -->
+
+        <section id="maps" data-aos="fade-up">
+            <div id="mapsContainer"></div>
+        </section>
+
+        <!-- GALLERY -->
+
+        <section id="gallery" data-aos="fade-up">
+            <div id="galleryGrid"></div>
+        </section>
+
+        <!-- VIDEO -->
+
+        <section id="video" data-aos="fade-up">
+            <div id="videoContainer"></div>
+        </section>
+
+        <!-- WALLET -->
+
+        <section id="wallet" data-aos="fade-up">
+            <div id="walletContainer"></div>
+        </section>
+
+        <!-- RSVP -->
+
+        <section id="rsvp" data-aos="fade-up">
+            <form id="rsvpForm">
+                <input type="text" id="guestInput" placeholder="Nama" />
+
+                <select id="attendance">
+                    <option value="hadir">Hadir</option>
+
+                    <option value="tidak_hadir">Tidak Hadir</option>
+                </select>
+
+                <input
+                    type="number"
+                    id="guestCount"
+                    placeholder="Jumlah Tamu"
+                />
+
+                <textarea id="message" placeholder="Ucapan"></textarea>
+
+                <button type="submit">Kirim</button>
+            </form>
+        </section>
+
+        <!-- UCAPAN -->
+
+        <section id="guestbook" data-aos="fade-up">
+            <div id="guestbookList"></div>
+        </section>
+
+        <!-- PENUTUP -->
+
+        <section id="closing">
+            <h2>Terima Kasih</h2>
+        </section>
+
+        <!-- MUSIC -->
+
+        <audio id="bgMusic" loop></audio>
+
+        <button id="musicBtn">
+            <i class="fas fa-music"></i>
+        </button>
+        
+        <nav class="bottom-nav">
+
+<a href="#quote">
+<i class="fas fa-home"></i>
+</a>
+
+<a href="#couple">
+<i class="fas fa-heart"></i>
+</a>
+
+<a href="#event">
+<i class="fas fa-calendar"></i>
+</a>
+
+<a href="#gallery">
+<i class="fas fa-image"></i>
+</a>
+
+<a href="#wallet">
+<i class="fas fa-wallet"></i>
+</a>
+
+</nav>
+
+        <script src="js/supabase.js"></script>
+        <script src="js/invitation.js"></script>
+
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+        <script>
+            AOS.init();
+        </script>
+    </body>
+</html>
