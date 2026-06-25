@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Dashboard IK-PRO</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  
+  <button class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+</button>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            IK-PRO
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-heart"></i>
+                    Data Pengantin
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-calendar"></i>
+                    Acara
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-images"></i>
+                    Galeri
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-music"></i>
+                    Musik
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-wallet"></i>
+                    Dompet Digital
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-users"></i>
+                    RSVP
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-book"></i>
+                    Buku Tamu
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-layer-group"></i>
+                    Template
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    Pengaturan
+                </a>
+            </li>
+
+            <li>
+                <button id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <div class="topbar">
+
+            <h1>
+                Dashboard Client
+            </h1>
+
+            <div id="userName">
+                Loading...
+            </div>
+
+        </div>
+
+        <!-- Statistik -->
+        <section class="stats">
+
+            <div class="card">
+                <h3>Total View</h3>
+                <span id="totalViews">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total RSVP</h3>
+                <span id="totalRsvp">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Hadir</h3>
+                <span id="totalHadir">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Ucapan</h3>
+                <span id="totalUcapan">0</span>
+            </div>
+
+        </section>
+
+        <!-- Welcome -->
+        <section class="welcome">
+
+            <h2>
+                Selamat Datang di IK-PRO
+            </h2>
+
+            <p>
+                Kelola undangan digital Anda dengan mudah.
+            </p>
+
+            <a href="#" class="create-btn">
+                Buat Undangan Baru
+            </a>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/supabase.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
