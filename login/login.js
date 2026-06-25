@@ -1,78 +1,40 @@
-import { supabase } from "../supabase/config.js";
+document
+.getElementById("loginForm")
+.addEventListener("submit", async (e) => {
 
-/* =======================
-   TAB SWITCH
-======================= */
+  e.preventDefault();
 
-const tabs = document.querySelectorAll(".tab");
-const forms = document.querySelectorAll(".form");
+  const email =
+  document.getElementById("email").value;
 
-tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
+  const password =
+  document.getElementById("password").value;
 
-        tabs.forEach(t => t.classList.remove("active"));
-        forms.forEach(f => f.classList.remove("active"));
+  const { data, error } =
+  await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
 
-        tab.classList.add("active");
+  console.log(data);
+  console.log(error);
 
-        document
-            .getElementById(tab.dataset.tab + "Form")
-            .classList.add("active");
-    });
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  window.location.href =
+  "../dashboard/dashboard.html";
+
 });
 
-/* =======================
-   REGISTER
-======================= */
+document
+.getElementById("googleLogin")
+.addEventListener("click", async () => {
 
-const registerForm = document.getElementById("registerForm");
+  await supabase.auth.signInWithOAuth({
+    provider:"google"
+  });
 
-registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById("registerEmail").value;
-    const password = document.getElementById("registerPassword").value;
-    const fullName = document.getElementById("fullName").value;
-
-    const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-            data: {
-                full_name: fullName
-            }
-        }
-    });
-
-    if (error) {
-        alert(error.message);
-        return;
-    }
-
-    alert("Pendaftaran berhasil! Silakan cek email untuk verifikasi.");
-});
-
-/* =======================
-   LOGIN
-======================= */
-
-const loginForm = document.getElementById("loginForm");
-
-loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-    });
-
-    if (error) {
-        alert(error.message);
-        return;
-    }
-
-    window.location.href = "../dashboard/dashboard.html";
 });
