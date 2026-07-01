@@ -1,195 +1,167 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Undangan - Undangan Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/invitation.css">
+</head>
+<body>
+    <!-- Same sidebar as dashboard -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="logo">
+                <span class="logo-icon">💍</span>
+                <span class="logo-text">Undangan<span class="logo-accent">Digital</span></span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                <span>Overview</span>
+            </a>
+            <a href="/invitation.html" class="nav-item active">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Undangan</span>
+            </a>
+            <a href="/guests.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <span>Tamu</span>
+            </a>
+            <a href="/settings.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Pengaturan</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="nav-item" onclick="Auth.logout()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                <span>Keluar</span>
+            </button>
+        </div>
+    </aside>
 
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-
-        <title>Undangan Pernikahan</title>
-
-        <link rel="stylesheet" href="css/invitation.css" />
-
-        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        />
-
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    </head>
-
-    <body>
-        <!-- COVER -->
-
-        <section id="cover">
-            <div class="cover-content">
-                <p>Kepada Yth.</p>
-
-                <h2 id="guestName">Nama Tamu</h2>
-
-                <h1 id="coupleName">Anisa & Bagas</h1>
-
-                <button id="openInvitation">Buka Undangan</button>
+    <main class="main-content">
+        <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+            <div class="topbar-right">
+                <button class="btn btn-icon" id="darkModeToggle">🌙</button>
+                <div class="user-menu">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="User" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">User</span>
+                </div>
             </div>
-        </section>
+        </header>
 
-        <!-- QUOTE -->
-
-        <section id="quote" data-aos="fade-up">
-            <h2>Quote Pernikahan</h2>
-
-            <p>
-                Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
-                pasangan...
-            </p>
-        </section>
-
-        <!-- PENGANTIN -->
-
-        <section id="couple" data-aos="fade-up">
-            <div id="groomCard"></div>
-
-            <div id="brideCard"></div>
-        </section>
-
-        <!-- CERITA CINTA -->
-
-        <section id="story" data-aos="fade-up">
-            <h2>Cerita Cinta</h2>
-
-            <div id="loveStory"></div>
-        </section>
-
-        <!-- ACARA -->
-
-        <section id="event" data-aos="fade-up">
-            <div id="eventContent"></div>
-        </section>
-
-        <!-- COUNTDOWN -->
-
-        <section id="countdown" data-aos="zoom-in">
-            <div class="count-box">
-                <h3 id="days">0</h3>
-                <p>Hari</p>
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1 id="pageTitle">Buat Undangan Baru</h1>
+                <p>Kelola detail undangan pernikahan Anda</p>
             </div>
 
-            <div class="count-box">
-                <h3 id="hours">0</h3>
-                <p>Jam</p>
+            <!-- Template Selection (Step 1) -->
+            <div class="content-section" id="templateSection">
+                <h2>1. Pilih Template</h2>
+                <div class="templates-select-grid" id="templateSelectGrid">
+                    <div class="loading-state">Memuat template...</div>
+                </div>
             </div>
 
-            <div class="count-box">
-                <h3 id="minutes">0</h3>
-                <p>Menit</p>
+            <!-- Couple Settings (Step 2) -->
+            <div class="content-section" id="coupleSection">
+                <h2>2. Data Mempelai</h2>
+                <form id="coupleForm" class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nama Mempelai Pria</label>
+                        <input type="text" id="groomName" class="form-input" placeholder="Nama lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nama Mempelai Wanita</label>
+                        <input type="text" id="brideName" class="form-input" placeholder="Nama lengkap" required>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Nama Orang Tua Pria</label>
+                        <input type="text" id="groomParent" class="form-input" placeholder="Putra dari Bapak ... dan Ibu ...">
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Nama Orang Tua Wanita</label>
+                        <input type="text" id="brideParent" class="form-input" placeholder="Putri dari Bapak ... dan Ibu ...">
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Cerita Cinta</label>
+                        <textarea id="story" class="form-input" rows="4" placeholder="Ceritakan kisah cinta Anda..."></textarea>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Quote / Kutipan</label>
+                        <input type="text" id="quote" class="form-input" placeholder="Contoh: Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan...">
+                    </div>
+                </form>
             </div>
 
-            <div class="count-box">
-                <h3 id="seconds">0</h3>
-                <p>Detik</p>
+            <!-- Events (Step 3) -->
+            <div class="content-section" id="eventsSection">
+                <div class="section-header-flex">
+                    <h2>3. Jadwal Acara</h2>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="addEventForm()">+ Tambah Acara</button>
+                </div>
+                <div id="eventsFormContainer">
+                    <!-- Events added dynamically -->
+                </div>
             </div>
-        </section>
 
-        <!-- MAPS -->
+            <!-- Gallery (Step 4) -->
+            <div class="content-section" id="gallerySection">
+                <h2>4. Galeri Foto</h2>
+                <div class="gallery-upload">
+                    <input type="file" id="galleryInput" multiple accept="image/*" hidden>
+                    <button class="gallery-upload-btn" onclick="document.getElementById('galleryInput').click()">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        <span>Klik untuk upload foto</span>
+                        <small>atau drag & drop</small>
+                    </button>
+                </div>
+                <div class="gallery-grid" id="galleryGrid"></div>
+            </div>
 
-        <section id="maps" data-aos="fade-up">
-            <div id="mapsContainer"></div>
-        </section>
+            <!-- Music (Step 5) -->
+            <div class="content-section" id="musicSection">
+                <h2>5. Musik Latar</h2>
+                <div class="form-group">
+                    <label class="form-label">Upload File MP3</label>
+                    <input type="file" id="musicInput" accept="audio/mp3,audio/mpeg" class="form-input">
+                    <p class="form-hint">File maksimal 5MB, format MP3</p>
+                </div>
+                <div id="musicPreview"></div>
+            </div>
 
-        <!-- GALLERY -->
+            <!-- Gifts (Step 6) -->
+            <div class="content-section" id="giftsSection">
+                <div class="section-header-flex">
+                    <h2>6. Gift Digital</h2>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="addGiftForm()">+ Tambah Rekening</button>
+                </div>
+                <div id="giftsFormContainer">
+                    <!-- Gifts added dynamically -->
+                </div>
+            </div>
 
-        <section id="gallery" data-aos="fade-up">
-            <div id="galleryGrid"></div>
-        </section>
+            <!-- Save Button -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline btn-lg" onclick="previewInvitation()">Preview</button>
+                <button type="button" class="btn btn-primary btn-lg" id="saveBtn" onclick="saveInvitation()">Simpan Undangan</button>
+            </div>
+        </div>
+    </main>
 
-        <!-- VIDEO -->
-
-        <section id="video" data-aos="fade-up">
-            <div id="videoContainer"></div>
-        </section>
-
-        <!-- WALLET -->
-
-        <section id="wallet" data-aos="fade-up">
-            <div id="walletContainer"></div>
-        </section>
-
-        <!-- RSVP -->
-
-        <section id="rsvp" data-aos="fade-up">
-            <form id="rsvpForm">
-                <input type="text" id="guestInput" placeholder="Nama" />
-
-                <select id="attendance">
-                    <option value="hadir">Hadir</option>
-
-                    <option value="tidak_hadir">Tidak Hadir</option>
-                </select>
-
-                <input
-                    type="number"
-                    id="guestCount"
-                    placeholder="Jumlah Tamu"
-                />
-
-                <textarea id="message" placeholder="Ucapan"></textarea>
-
-                <button type="submit">Kirim</button>
-            </form>
-        </section>
-
-        <!-- UCAPAN -->
-
-        <section id="guestbook" data-aos="fade-up">
-            <div id="guestbookList"></div>
-        </section>
-
-        <!-- PENUTUP -->
-
-        <section id="closing">
-            <h2>Terima Kasih</h2>
-        </section>
-
-        <!-- MUSIC -->
-
-        <audio id="bgMusic" loop></audio>
-
-        <button id="musicBtn">
-            <i class="fas fa-music"></i>
-        </button>
-        
-        <nav class="bottom-nav">
-
-<a href="#quote">
-<i class="fas fa-home"></i>
-</a>
-
-<a href="#couple">
-<i class="fas fa-heart"></i>
-</a>
-
-<a href="#event">
-<i class="fas fa-calendar"></i>
-</a>
-
-<a href="#gallery">
-<i class="fas fa-image"></i>
-</a>
-
-<a href="#wallet">
-<i class="fas fa-wallet"></i>
-</a>
-
-</nav>
-
-        <script src="js/supabase.js"></script>
-        <script src="js/invitation.js"></script>
-
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-        <script>
-            AOS.init();
-        </script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/invitation.js"></script>
+</body>
 </html>

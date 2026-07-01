@@ -1,156 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-
-        <title>Dashboard IK-PRO</title>
-
-        <link rel="stylesheet" href="css/dashboard.css" />
-
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        />
-
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    </head>
-
-    <body>
-        <button class="menu-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <div class="overlay" id="overlay"></div>
-
-        <div class="dashboard">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <div class="logo">IK-PRO</div>
-
-                <ul>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-home"></i>
-                            Dashboard
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/pengantin.html">
-                            <i class="fas fa-heart"></i>
-                            Data Pengantin
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/acara.html">
-                            <i class="fas fa-calendar"></i>
-                            Acara
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/gallery.html">
-                            <i class="fas fa-images"></i>
-                            Galeri
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/music.html">
-                            <i class="fas fa-music"></i>
-                            Musik
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/dompet.html">
-                            <i class="fas fa-wallet"></i>
-                            Dompet Digital
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/rsvp.html">
-                            <i class="fas fa-users"></i>
-                            RSVP
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/bukutamu.html">
-                            <i class="fas fa-book"></i>
-                            Buku Tamu
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dashboard/template.html">
-                            <i class="fas fa-layer-group"></i>
-                            Template
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-cog"></i>
-                            Pengaturan
-                        </a>
-                    </li>
-
-                    <li>
-                        <button id="logoutBtn">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout
-                        </button>
-                    </li>
-                </ul>
-            </aside>
-
-            <!-- Main -->
-            <main class="main-content">
-                <div class="topbar">
-                    <h1>Dashboard Client</h1>
-
-                    <div id="userName">Loading...</div>
-                </div>
-
-                <!-- Statistik -->
-                <section class="stats">
-                    <div class="card">
-                        <h3>Total View</h3>
-                        <span id="totalViews">0</span>
-                    </div>
-
-                    <div class="card">
-                        <h3>Total RSVP</h3>
-                        <span id="totalRsvp">0</span>
-                    </div>
-
-                    <div class="card">
-                        <h3>Total Hadir</h3>
-                        <span id="totalHadir">0</span>
-                    </div>
-
-                    <div class="card">
-                        <h3>Total Ucapan</h3>
-                        <span id="totalUcapan">0</span>
-                    </div>
-                </section>
-
-                <!-- Welcome -->
-                <section class="welcome">
-                    <h2>Selamat Datang di IK-PRO</h2>
-
-                    <p>Kelola undangan digital Anda dengan mudah.</p>
-
-                    <a href="#" class="create-btn"> Buat Undangan Baru </a>
-                </section>
-            </main>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Undangan Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="logo">
+                <span class="logo-icon">💍</span>
+                <span class="logo-text">Undangan<span class="logo-accent">Digital</span></span>
+            </a>
         </div>
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="nav-item active">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                <span>Overview</span>
+            </a>
+            <a href="/invitation.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Undangan</span>
+            </a>
+            <a href="/guests.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <span>Tamu</span>
+            </a>
+            <a href="/rsvp.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>RSVP</span>
+            </a>
+            <a href="/settings.html" class="nav-item">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Pengaturan</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="nav-item" onclick="Auth.logout()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                <span>Keluar</span>
+            </button>
+        </div>
+    </aside>
 
-        <script src="js/supabase.js"></script>
-        <script src="js/dashboard.js"></script>
-    </body>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+            <div class="topbar-right">
+                <button class="btn btn-icon" id="darkModeToggle">🌙</button>
+                <div class="user-menu">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="User" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">Loading...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p>Selamat datang kembali, <span id="welcomeName">User</span>!</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(124, 58, 237, 0.1); color: var(--primary);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Total Kunjungan</span>
+                        <span class="stat-card-value" id="totalViews">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Total Tamu</span>
+                        <span class="stat-card-value" id="totalGuests">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Konfirmasi Hadir</span>
+                        <span class="stat-card-value" id="totalAttending">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(236, 72, 153, 0.1); color: var(--secondary);">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Ucapan</span>
+                        <span class="stat-card-value" id="totalWishes">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invitations List -->
+            <div class="content-section">
+                <div class="section-header-flex">
+                    <h2>Undangan Saya</h2>
+                    <a href="/invitation.html?action=create" class="btn btn-primary">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                        Buat Undangan
+                    </a>
+                </div>
+                <div class="invitations-list" id="invitationsList">
+                    <div class="loading-state">Memuat undangan...</div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="content-section">
+                <h2>Aktivitas Terbaru</h2>
+                <div class="activity-list" id="activityList">
+                    <div class="activity-item">
+                        <div class="activity-icon">🎉</div>
+                        <div class="activity-content">
+                            <p>Selamat datang di Undangan Digital!</p>
+                            <span class="activity-time">Baru saja</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
 </html>

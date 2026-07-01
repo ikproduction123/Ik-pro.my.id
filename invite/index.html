@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .invite-page { min-height: 100vh; }
+        .invite-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #fdf2f8 0%, #faf5ff 50%, #f0f9ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .invite-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .invite-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1rem 0;
+        }
+        .invite-open-btn {
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(124, 58, 237, 0); }
+        }
+        .invite-content { display: none; }
+        .invite-content.active { display: block; }
+        .section-invite {
+            padding: 5rem 1.5rem;
+            text-align: center;
+        }
+        .section-couple { background: white; }
+        .section-event { background: var(--surface); }
+        .section-gallery { background: white; }
+        .section-rsvp { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; }
+        .section-wishes { background: var(--surface); }
+        .section-gift { background: white; }
+        
+        .couple-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: var(--shadow-lg);
+        }
+        .event-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+        .gallery-invite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .gallery-invite-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+        }
+        .rsvp-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            color: var(--text);
+        }
+        .wish-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            margin: 0 auto 1rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .gift-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            max-width: 400px;
+            margin: 0 auto 1rem;
+            border: 1px solid var(--border);
+        }
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        .music-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .music-toggle.playing { animation: spin 3s linear infinite; }
+    </style>
+</head>
+<body class="invite-page">
+    <!-- Opening Screen -->
+    <div class="invite-hero" id="openingScreen">
+        <p style="font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary);">The Wedding of</p>
+        <h1 class="invite-names" id="coupleNames">Loading...</h1>
+        <p style="color: var(--text-secondary);" id="weddingDate">Loading...</p>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--text-muted);" id="inviteQuote"></p>
+        <button class="invite-open-btn" onclick="openInvitation()">Buka Undangan</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="invite-content" id="mainContent">
+        <!-- Couple Section -->
+        <section class="section-invite section-couple" id="coupleSection">
+            <p style="color: var(--text-secondary); font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase;">The Wedding of</p>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 1rem 0;" id="coupleNamesMain">Loading...</h2>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin: 2rem 0;">
+                <div style="text-align: center;">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="Groom" class="couple-photo" id="groomPhoto">
+                    <h3 style="margin-top: 1rem; font-family: 'Playfair Display', serif;" id="groomNameDisplay">Loading...</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary);" id="groomParentDisplay"></p>
+                </div>
+                <div style="display: flex; align-items: center; font-size: 2rem; color: var(--secondary);">❤️</div>
+                <div style="text-align: center;">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="Bride" class="couple-photo" id="bridePhoto">
+                    <h3 style="margin-top: 1rem; font-family: 'Playfair Display', serif;" id="brideNameDisplay">Loading...</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary);" id="brideParentDisplay"></p>
+                </div>
+            </div>
+            <div style="max-width: 600px; margin: 0 auto; line-height: 1.8; color: var(--text-secondary);" id="storyDisplay"></div>
+        </section>
+
+        <!-- Event Section -->
+        <section class="section-invite section-event" id="eventSection">
+            <p style="color: var(--text-secondary); font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase;">Save The Date</p>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin: 1rem 0 2rem;">Jadwal Acara</h2>
+            <div id="eventsContainer"></div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="section-invite section-gallery" id="gallerySection">
+            <p style="color: var(--text-secondary); font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase;">Our Moments</p>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin: 1rem 0 2rem;">Galeri</h2>
+            <div class="gallery-invite-grid" id="galleryContainer"></div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="section-invite section-rsvp" id="rsvpSection">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">RSVP</h2>
+            <div class="rsvp-form">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label class="form-label">Nama</label>
+                        <input type="text" id="rsvpName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kehadiran</label>
+                        <select id="rsvpStatus" class="form-input" required>
+                            <option value="hadir">Hadir</option>
+                            <option value="tidak_hadir">Tidak Hadir</option>
+                            <option value="mungkin">Mungkin Hadir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jumlah Tamu</label>
+                        <input type="number" id="rsvpCount" class="form-input" value="1" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pesan (Opsional)</label>
+                        <textarea id="rsvpMessage" class="form-input" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Kirim RSVP</button>
+                </form>
+                <div id="rsvpStats" style="margin-top: 2rem;"></div>
+            </div>
+        </section>
+
+        <!-- Wishes Section -->
+        <section class="section-invite section-wishes" id="wishesSection">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">Ucapan & Doa</h2>
+            <div style="max-width: 600px; margin: 0 auto 2rem;">
+                <form id="wishForm">
+                    <div class="form-group">
+                        <input type="text" id="wishName" class="form-input" placeholder="Nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="wishMessage" class="form-input" rows="3" placeholder="Tulis ucapan dan doa..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kirim Ucapan</button>
+                </form>
+            </div>
+            <div id="wishesContainer"></div>
+        </section>
+
+        <!-- Gift Section -->
+        <section class="section-invite section-gift" id="giftSection">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">Gift Digital</h2>
+            <div id="giftsContainer"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 3rem 1.5rem; background: var(--surface); border-top: 1px solid var(--border);">
+            <p style="font-size: 0.875rem; color: var(--text-muted);">Made with ❤️ using UndanganDigital</p>
+        </footer>
+    </div>
+
+    <!-- Music -->
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">🎵</button>
+    <audio id="bgMusic" loop></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/rsvp.js"></script>
+    <script>
+        let currentInvitation = null;
+        let musicPlaying = false;
+        
+        // Get slug from URL path
+        const pathParts = window.location.pathname.split('/');
+        const slug = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadInvitation();
+        });
+        
+        async function loadInvitation() {
+            try {
+                // Find invitation by slug
+                const { data: invitation, error } = await supabase
+                    .from('invitations')
+                    .select('*, templates(*), invitation_settings(*), events(*), galleries(*), gifts(*)')
+                    .eq('slug', slug)
+                    .eq('status', 'published')
+                    .single();
+                    
+                if (error || !invitation) {
+                    document.getElementById('coupleNames').textContent = 'Undangan tidak ditemukan';
+                    return;
+                }
+                
+                currentInvitation = invitation;
+                
+                // Increment view
+                await supabase.rpc('increment_invitation_view', { invitation_slug: slug });
+                
+                // Populate data
+                const settings = invitation.invitation_settings?.[0] || {};
+                const coupleName = `${settings.groom_name || ''} & ${settings.bride_name || ''}`;
+                
+                document.getElementById('coupleNames').textContent = coupleName;
+                document.getElementById('coupleNamesMain').textContent = coupleName;
+                document.getElementById('groomNameDisplay').textContent = settings.groom_name || '';
+                document.getElementById('brideNameDisplay').textContent = settings.bride_name || '';
+                document.getElementById('groomParentDisplay').textContent = settings.groom_parent || '';
+                document.getElementById('brideParentDisplay').textContent = settings.bride_parent || '';
+                document.getElementById('storyDisplay').textContent = settings.story || '';
+                document.getElementById('inviteQuote').textContent = settings.quote || '';
+                
+                // Events
+                const eventsContainer = document.getElementById('eventsContainer');
+                const events = invitation.events || [];
+                if (events.length) {
+                    const firstEvent = events[0];
+                    document.getElementById('weddingDate').textContent = firstEvent.event_date 
+                        ? new Date(firstEvent.event_date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                        : '';
+                }
+                
+                eventsContainer.innerHTML = events.map(evt => `
+                    <div class="event-card" style="margin-bottom: 1.5rem;">
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem;">${evt.title}</h3>
+                        <p style="margin-bottom: 0.5rem;">📅 ${evt.event_date ? new Date(evt.event_date).toLocaleDateString('id-ID') : '-'}</p>
+                        <p style="margin-bottom: 0.5rem;">🕐 ${evt.event_time || '-'}</p>
+                        <p style="margin-bottom: 1rem;">📍 ${evt.location || '-'}</p>
+                        ${evt.maps_url ? `<a href="${evt.maps_url}" target="_blank" class="btn btn-primary btn-sm">Buka Google Maps</a>` : ''}
+                    </div>
+                `).join('');
+                
+                // Gallery
+                const galleries = invitation.galleries || [];
+                document.getElementById('galleryContainer').innerHTML = galleries.map(g => `
+                    <img src="${g.image_url}" alt="Gallery" loading="lazy">
+                `).join('');
+                
+                // Gifts
+                const gifts = invitation.gifts || [];
+                document.getElementById('giftsContainer').innerHTML = gifts.map(g => `
+                    <div class="gift-card">
+                        <h4>${g.bank_name}</h4>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">${g.account_name}</p>
+                        <p style="font-family: monospace; font-size: 1.125rem; font-weight: 600;">${g.account_number}</p>
+                        <button class="copy-btn" onclick="Utils.copyToClipboard('${g.account_number}')">Salin Nomor</button>
+                    </div>
+                `).join('') || '<p style="color: var(--text-secondary);">Tidak ada informasi gift</p>';
+                
+                // Music
+                if (settings.music_url) {
+                    document.getElementById('bgMusic').src = settings.music_url;
+                }
+                
+                // Load RSVPs and Wishes
+                loadRSVPStats();
+                loadWishes();
+                initRealtime();
+                
+            } catch (err) {
+                console.error('Error:', err);
+                document.getElementById('coupleNames').textContent = 'Terjadi kesalahan';
+            }
+        }
+        
+        function openInvitation() {
+            document.getElementById('openingScreen').style.display = 'none';
+            document.getElementById('mainContent').classList.add('active');
+            
+            // Auto play music after user interaction
+            if (currentInvitation?.invitation_settings?.[0]?.music_url) {
+                toggleMusic();
+            }
+        }
+        
+        function toggleMusic() {
+            const audio = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicToggle');
+            
+            if (musicPlaying) {
+                audio.pause();
+                btn.classList.remove('playing');
+                btn.textContent = '🎵';
+            } else {
+                audio.play().catch(() => {});
+                btn.classList.add('playing');
+                btn.textContent = '⏸';
+            }
+            musicPlaying = !musicPlaying;
+        }
+        
+        // RSVP Form
+        document.getElementById('rsvpForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await RSVPManager.submitRSVP(
+                    currentInvitation.id,
+                    document.getElementById('rsvpName').value,
+                    document.getElementById('rsvpStatus').value,
+                    document.getElementById('rsvpCount').value,
+                    document.getElementById('rsvpMessage').value
+                );
+                Utils.toast('RSVP berhasil dikirim!', 'success');
+                e.target.reset();
+                loadRSVPStats();
+            } catch (err) {
+                Utils.toast(err.message, 'error');
+            }
+        });
+        
+        // Wish Form
+        document.getElementById('wishForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const { error } = await supabase.from('wishes').insert({
+                    invitation_id: currentInvitation.id,
+                    name: document.getElementById('wishName').value,
+                    message: document.getElementById('wishMessage').value
+                });
+                if (error) throw error;
+                Utils.toast('Ucapan berhasil dikirim!', 'success');
+                e.target.reset();
+                loadWishes();
+            } catch (err) {
+                Utils.toast(err.message, 'error');
+            }
+        });
+        
+        async function loadRSVPStats() {
+            const rsvps = await RSVPManager.loadRSVPs(currentInvitation.id);
+            RSVPManager.renderRSVPStats('rsvpStats', rsvps);
+        }
+        
+        async function loadWishes() {
+            try {
+                const { data: wishes } = await supabase
+                    .from('wishes')
+                    .select('*')
+                    .eq('invitation_id', currentInvitation.id)
+                    .eq('is_approved', true)
+                    .order('created_at', { ascending: false });
+                    
+                const container = document.getElementById('wishesContainer');
+                container.innerHTML = wishes?.map(w => `
+                    <div class="wish-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                            <strong style="color: var(--primary);">${w.name}</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">${new Date(w.created_at).toLocaleDateString('id-ID')}</span>
+                        </div>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">${w.message}</p>
+                    </div>
+                `).join('') || '<p style="color: var(--text-secondary);">Belum ada ucapan</p>';
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        
+        function initRealtime() {
+            // Realtime wishes
+            supabase.channel(`wishes-${currentInvitation.id}`)
+                .on('postgres_changes', {
+                    event: 'INSERT',
+                    schema: 'public',
+                    table: 'wishes',
+                    filter: `invitation_id=eq.${currentInvitation.id}`
+                }, () => loadWishes())
+                .subscribe();
+                
+            // Realtime RSVP
+            supabase.channel(`rsvp-${currentInvitation.id}`)
+                .on('postgres_changes', {
+                    event: 'INSERT',
+                    schema: 'public',
+                    table: 'rsvps',
+                    filter: `invitation_id=eq.${currentInvitation.id}`
+                }, () => loadRSVPStats())
+                .subscribe();
+        }
+    </script>
+</body>
+</html>

@@ -1,70 +1,85 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
-
-<title>Register - IK-PRO</title>
-
-<link rel="stylesheet"
-href="css/auth.css">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - Undangan Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">💍</span>
+                        <span class="logo-text">Undangan<span class="logo-accent">Digital</span></span>
+                    </a>
+                    <h1>Buat Akun Baru</h1>
+                    <p>Mulai ciptakan undangan digital pernikahan Anda</p>
+                </div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label" for="fullname">Nama Lengkap</label>
+                        <input type="text" id="fullname" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="nama@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="+62 812-3456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Minimal 6 karakter" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword">Konfirmasi Password</label>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Ulangi password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">Daftar</button>
+                </form>
+                <div class="auth-footer">
+                    Sudah punya akun? <a href="/login.html">Masuk</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="auth-container">
-
-<div class="auth-card">
-
-<h2>Daftar IK-PRO</h2>
-
-<form id="registerForm">
-
-<input
-type="text"
-id="fullname"
-placeholder="Nama Lengkap"
-required>
-
-<input
-type="email"
-id="regEmail"
-placeholder="Email"
-required>
-
-<input
-type="password"
-id="regPassword"
-placeholder="Password"
-required>
-
-<button type="submit">
-Daftar
-</button>
-
-</form>
-
-<p>
-Sudah punya akun?
-
-<a href="login.html">
-Login
-</a>
-
-</p>
-
-</div>
-
-</div>
-
-<script src="js/supabase.js"></script>
-<script src="js/auth.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                Utils.toast('Password tidak cocok!', 'error');
+                return;
+            }
+            
+            const btn = document.getElementById('registerBtn');
+            Utils.setLoading(btn, true);
+            
+            try {
+                await Auth.register(
+                    document.getElementById('fullname').value,
+                    document.getElementById('email').value,
+                    password,
+                    document.getElementById('phone').value
+                );
+            } catch (err) {
+                console.error(err);
+            } finally {
+                Utils.setLoading(btn, false);
+            }
+        });
+    </script>
 </body>
 </html>
